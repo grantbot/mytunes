@@ -4,6 +4,7 @@ var AppModel = Backbone.Model.extend({
   initialize: function(params){
     this.set('currentSong', new SongModel());
     this.set('songQueue', new SongQueue());
+    this.set('isPlayingSong', false);
 
     /* Note that 'this' is passed as the third argument. That third argument is
     the context. The 'play' handler will always be bound to that context we pass in.
@@ -14,8 +15,24 @@ var AppModel = Backbone.Model.extend({
 
 
     params.library.on('play', function(song){
-      this.set('currentSong', song);
+      var isPlayingSong = this.get('isPlayingSong');
+
+      if(!isPlayingSong){
+        this.set('currentSong', song);
+        this.set('isPlayingSong', true);
+      } else {
+        song.enqueue();
+      }
     }, this);
+
+//////////////////////
+    var self = this;
+    params.library.on('enqueue', function(song) {
+      self.get('songQueue').enqueue(song);
+    });
+
   }
 
 });
+
+///Why is the model listening? isnt' the controller supposed to listen for user interactions?
