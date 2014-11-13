@@ -24,8 +24,8 @@ var AppView = Backbone.View.extend({
 
 
     this.playerView.on('ended', function(){
-      if(this.songQueueView.collection.queue.length){
-        var nextSongToPlay = this.songQueueView.collection.queue.shift();
+      if(this.songQueueView.collection.length){
+        var nextSongToPlay = this.songQueueView.collection.shift();
         this.playerView.setSong(nextSongToPlay);
       }
         // save variable with shifted song
@@ -41,7 +41,8 @@ var AppView = Backbone.View.extend({
   render: function(){
     return this.$el.html([
       this.playerView.$el,
-      this.libraryView.$el
+      this.libraryView.$el,
+      this.songQueueView.$el
     ]);
   },
 
