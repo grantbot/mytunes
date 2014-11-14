@@ -2,9 +2,6 @@
 <html>
   <body>
 
-  <canvas id="canvas"></canvas>
-
-
     <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
      below them until after the scripts load-->
     <script src="bower_components/jquery/jquery.min.js"></script>
@@ -25,7 +22,6 @@
     <script src="views/SongQueueView.js"></script>
     <script src="views/SongQueueEntryView.js"></script>
 
-    <script src="models/visualizer.js"></script>
 
     <script>
       $(function(){
@@ -40,5 +36,6 @@
         $('body').append(appView.render());
       });
     </script>
+    <script src="models/visualizer.js"></script>
   </body>
 </html>
